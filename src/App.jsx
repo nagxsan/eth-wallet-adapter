@@ -38,28 +38,30 @@ import './App.css'
 // }
 
 // Viem example
-import { createPublicClient, http } from "viem"
-import { mainnet } from "viem/chains"
-import { useState } from "react"
+// import { createPublicClient, http } from "viem"
+// import { mainnet } from "viem/chains"
+// import { useState } from "react"
 
-export default function App() {
+// export default function App() {
   
-  const [blockNumber, setBlockNumber] = useState('')
+//   const [blockNumber, setBlockNumber] = useState('')
 
-  const client = createPublicClient({
-    chain: mainnet,
-    transport: http(),
-  })
+//   const client = createPublicClient({
+//     chain: mainnet,
+//     transport: http(),
+//   })
 
-  async function getBlockNumber() {
-    const blockNum = await client.getBlockNumber()
-    setBlockNumber(blockNum.toString())
-  }
+//   async function getBlockNumber() {
+//     const blockNum = await client.getBlockNumber()
+//     setBlockNumber(blockNum.toString())
+//   }
 
-  return (
-    <div>
-      <button onClick={async () => await getBlockNumber()}>Get Block Number</button>
-      <div>{blockNumber}</div>
-    </div>
-  )
-}
+//   return (
+//     <div>
+//       <button onClick={async () => await getBlockNumber()}>Get Block Number</button>
+//       <div>{blockNumber}</div>
+//     </div>
+//   )
+// }
+
+
