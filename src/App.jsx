@@ -1,35 +1,65 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+// TanStack Example
+// import axios from "axios"
+// import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query"
+
+// const queryClient = new QueryClient()
+
+// async function getter() {
+//   const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
+//   return response.data
+// }
+
+// export default function App() {
+
+//   return (
+//     <QueryClientProvider client={queryClient}>
+//       <Posts />
+//     </QueryClientProvider>
+//   )
+// }
+
+// function Posts() {
+//   const { data, isLoading, error } = useQuery({ queryKey: ['posts'], queryFn: getter })
+//   console.log(data)
+
+//   if (error) {
+//     return <div>Error</div>
+//   } else if (isLoading) {
+//     return 'Loading...'
+//   } else {
+//     return (
+//       <div>
+//         {JSON.stringify(data)}
+//       </div>
+//     )
+//   }
+// }
+
+// Viem example
+import { createPublicClient, http } from "viem"
+import { mainnet } from "viem/chains"
+import { useState } from "react"
+
+export default function App() {
+  
+  const [blockNumber, setBlockNumber] = useState('')
+
+  const client = createPublicClient({
+    chain: mainnet,
+    transport: http(),
+  })
+
+  async function getBlockNumber() {
+    const blockNum = await client.getBlockNumber()
+    setBlockNumber(blockNum.toString())
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <button onClick={async () => await getBlockNumber()}>Get Block Number</button>
+      <div>{blockNumber}</div>
+    </div>
   )
 }
-
-export default App
